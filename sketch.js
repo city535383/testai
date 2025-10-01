@@ -16,9 +16,11 @@ let imageModelURL = 'https://city535383.github.io/testai/';
 
 // Video
 let video;
-let flippedVideo;
+let constraints;
 // To store the classification
 let label = "";
+
+
 
 // Load the model first
 function preload() {
@@ -30,7 +32,7 @@ function setup() {
 
   // Create the video
 
-  var constraints = {
+  constraints = {
 
     audio: false,
 
