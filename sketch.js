@@ -26,7 +26,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(320, 320);
+  createCanvas(200, 200);
 
   // Create the video
 
@@ -53,8 +53,8 @@ function setup() {
   };
   
   // Create the video
-  video = createCapture(constraints);;
-  video.size(320,320);
+  video = createCapture(constraints);
+  video.size(200,200);
   video.hide();
 
   //flippedVideo = ml5.flipImage(video)
@@ -77,6 +77,7 @@ function draw() {
 // Get a prediction for the current video frame
 function classifyVideo() {
   //flippedVideo = ml5.flipImage(video)
+  video = createCapture(constraints);
   classifier.classify(video, gotResult);
 }
 
@@ -85,7 +86,7 @@ function gotResult(results) {
   // If there is an error
  
   // The results are in an array ordered by confidence.
-  console.log(results[0].label);
+  //console.log(results[0].label);
   label = results[0].label;
   // Classifiy again!
   classifyVideo();
