@@ -29,7 +29,31 @@ function setup() {
   createCanvas(320, 320);
 
   // Create the video
-  video = createCapture(Video);;
+
+  var constraints = {
+
+    audio: false,
+
+    video: {
+
+      facingMode: {
+
+        exact: "environment"
+
+      }
+
+    }   
+
+    //video: {
+
+      //facingMode: "user"
+
+    //}
+
+  };
+  
+  // Create the video
+  video = createCapture(constraints);;
   video.size(320,320);
   video.hide();
 
