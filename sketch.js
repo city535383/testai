@@ -26,10 +26,31 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(320, 260);
+  createCanvas(320, 320);
+      var constraints = {
+
+    audio: false,
+
+    video: {
+
+      facingMode: {
+
+        exact: "environment"
+
+      }
+
+    }   
+
+    //video: {
+
+      //facingMode: "user"
+
+    //}
+
+  };
   // Create the video
-  video = createCapture(VIDEO);
-  video.size(320, 240);
+  video = createCapture(constraints);;
+  video.size(320,320);
   video.hide();
 
   //flippedVideo = ml5.flipImage(video)
