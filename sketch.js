@@ -12,15 +12,13 @@ This example uses p5 preload function to create the classifier
 // Classifier Variable
 let classifier;
 // Model URL
-let imageModelURL = 'https://teachablemachine.withgoogle.com/models/RgMNc4Hg89/';
+let imageModelURL = 'https://teachablemachine.withgoogle.com/models/hk59cAHml/';
 
 // Video
 let video;
-let constraints;
+let flippedVideo;
 // To store the classification
 let label = "";
-
-
 
 // Load the model first
 function preload() {
@@ -28,38 +26,25 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(200, 200);
-
-  // Create the video
-
-  constraints = {
-
-    audio: false,
-
-    video: {
-
-      facingMode: {
-
-        exact: "environment"
-
-      }
-
-    }   
-
-    //video: {
-
-      //facingMode: "user"
-
-    //}
-
-  };
+  createCanvas(320, 320);
   
   // Create the video
-  video = createCapture(VIDEO);
-  video.size(200,200);
+    var constraints = {
+    audio: false,
+    video: {
+      facingMode: {
+        exact: "environment"
+      }
+    }   
+    //video: {
+      //facingMode: "user"
+    //}
+  };
+  video = createCapture(constraints);
+  video.size(320, 320);
   video.hide();
 
-  //flippedVideo = ml5.flipImage(video)
+  flippedVideo = ml5.flipImage(video)
   // Start classifying
   classifyVideo();
 }
@@ -67,7 +52,7 @@ function setup() {
 function draw() {
   background(0);
   // Draw the video
-  image(video, 0, 0);
+  image(flippedVideo, 0, 0);
 
   // Draw the label
   fill(255);
@@ -78,16 +63,19 @@ function draw() {
 
 // Get a prediction for the current video frame
 function classifyVideo() {
-  //flippedVideo = ml5.flipImage(video)
-  classifier.classify(video, gotResult);
+  flippedVideo = ml5.flipImage(video)
+  classifier.classify(flippedVideo, gotResult);
 }
 
 // When we get a result
-function gotResult(results) {
+function gotResult(error, results) {
   // If there is an error
- 
+  if (error) {
+    console.error(error);
+    return;
+  }
   // The results are in an array ordered by confidence.
-  //console.log(results[0].label);
+  // console.log(results[0]);
   label = results[0].label;
   // Classifiy again!
   classifyVideo();
