@@ -55,7 +55,7 @@ function setup() {
   };
   
   // Create the video
-  video = createCapture(constraints);
+  video = createCapture(VIDEO);
   video.size(200,200);
   video.hide();
 
